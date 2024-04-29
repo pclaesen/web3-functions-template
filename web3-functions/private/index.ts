@@ -3,7 +3,7 @@ import {
   Web3FunctionContext,
   Web3FunctionResult,
 } from "@gelatonetwork/web3-functions-sdk";
-import { Octokit } from "octokit";
+import { Octokit } from "@octokit/rest";
 
 // import dependencies used in onRun.js
 import { ethers } from "ethers";

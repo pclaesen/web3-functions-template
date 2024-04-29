@@ -1,9 +1,9 @@
-import { Log } from "@ethersproject/providers";
+import { Log } from "ethers";
 import {
   Web3Function,
   Web3FunctionContext,
 } from "@gelatonetwork/web3-functions-sdk";
-import { Contract } from "@ethersproject/contracts";
+import { Contract } from "ethers";
 
 const MAX_RANGE = 100; // limit range of events to comply with rpc providers
 const MAX_REQUESTS = 100; // limit number of requests on every execution to avoid hitting timeout
@@ -23,7 +23,7 @@ Web3Function.onRun(async (context: Web3FunctionContext) => {
     "0x8F143A5D62de01EAdAF9ef16d4d3694380066D9F";
   const oracle = new Contract(oracleAddress, ORACLE_ABI, provider);
   const counter = new Contract(counterAddress, COUNTER_ABI, provider);
-  const topics = [oracle.interface.getEventTopic("PriceUpdated")];
+  const topics = [oracle.getEventTopic("PriceUpdated")];
   const currentBlock = await provider.getBlockNumber();
 
   // Retrieve last processed block number & nb events matched from storage
@@ -62,7 +62,7 @@ Web3Function.onRun(async (context: Web3FunctionContext) => {
   totalEvents += logs.length;
   for (const log of logs) {
     const event = oracle.interface.parseLog(log);
-    const [time, price] = event.args;
+    const [time, price] = event!.args;
     console.log(
       `Price updated: ${price}$ at ${new Date(time * 1000).toUTCString()}`
     );

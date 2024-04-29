@@ -1,5 +1,5 @@
-import { JsonRpcProvider } from "@ethersproject/providers";
-import { Wallet } from "@ethersproject/wallet";
+import { JsonRpcProvider } from "ethers";
+import { Wallet } from "ethers";
 import { AutomateSDK, TriggerType } from "@gelatonetwork/automate-sdk";
 import { Web3FunctionBuilder } from "@gelatonetwork/web3-functions-sdk/builder";
 import dotenv from "dotenv";

@@ -2,7 +2,7 @@ import {
   Web3Function,
   Web3FunctionContext,
 } from "@gelatonetwork/web3-functions-sdk";
-import { Contract } from "@ethersproject/contracts";
+import { Contract } from "ethers";
 import ky from "ky"; // we recommend using ky as axios doesn't support fetch by default
 
 const AD_BOARD_ABI = [

@@ -1,8 +1,8 @@
-import { JsonRpcProvider } from "@ethersproject/providers";
-import { Wallet } from "@ethersproject/wallet";
+import { JsonRpcProvider } from "ethers";
+import { Wallet, Signer } from "ethers";
 import { AutomateSDK, TriggerType } from "@gelatonetwork/automate-sdk";
 import { Web3FunctionBuilder } from "@gelatonetwork/web3-functions-sdk/builder";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 import path from "path";
 dotenv.config();
 
@@ -15,8 +15,8 @@ const providerUrl = process.env.PROVIDER_URLS.split(",")[0];
 const main = async () => {
   // Instanciate provider & signer
   const provider = new JsonRpcProvider(providerUrl);
-  const chainId = (await provider.getNetwork()).chainId;
-  const wallet = new Wallet(pk as string, provider);
+  const chainId = Number(await provider.getNetwork().then(network => network.chainId));
+  const wallet: Signer = new Wallet(pk as string, provider);
   const automate = new AutomateSDK(chainId, wallet);
 
   // Deploy Web3Function on IPFS
