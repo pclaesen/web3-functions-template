@@ -93,7 +93,12 @@ Web3Function.onRun(async (context: Web3FunctionContext) => {
   if(paymentsToRedeemArray.length > 0) {
     return {
       canExec: true,
-      callData: paytrContract.interface.encodeFunctionData("payOutERC20Invoice", [paymentsToRedeemArray]),
+      callData: [
+        {
+          to: contractAddress,
+          data: paytrContract.interface.encodeFunctionData("payOutERC20Invoice", [paymentsToRedeemArray])
+        },
+      ]
     };
   } else {
     return { canExec: false, message: `Nothing to pay` };
